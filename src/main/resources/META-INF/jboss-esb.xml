@@ -1,0 +1,21 @@
+<jbossesb xsi:schemaLocation="http://anonsvn.labs.jboss.com/labs/jbossesb/trunk/product/etc/schemas/xml/jbossesb-1.0.1.xsd http://anonsvn.jboss.org/repos/labs/labs/jbossesb/trunk/product/etc/schemas/xml/jbossesb-1.2.0.xsd" parameterReloadSecs="5" xmlns="http://anonsvn.labs.jboss.com/labs/jbossesb/trunk/product/etc/schemas/xml/jbossesb-1.2.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <services>
+        <service name="helloWorldService" category="helloWorldCategory" description="Hello World" invmScope="GLOBAL">
+            <listeners>
+                <http-gateway name="http-gateway" payloadAs="STRING"/>
+            </listeners>
+            <actions mep="RequestResponse">
+                <!-- This action prints the content of the message -->
+                <action name="action1" class="org.jboss.soa.esb.actions.SystemPrintln">
+                    <property name="printfull" value="false"/>
+                </action>
+                <action name="action2" class="ar.com.pabloExample.service.MessageCustomAction" process="process"/>
+                <!-- This action logs a user text and the service name -->
+                <action name="action3" class="org.jboss.soa.esb.actions.ServiceLoggerAction">
+                    <property name="text" value="Message arrived"/>
+                    <property name="log-payload-location" value="true"/>
+                </action>
+            </actions>
+        </service>
+    </services>
+</jbossesb>
